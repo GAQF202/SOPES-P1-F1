@@ -28,10 +28,8 @@ function socketConnection(dates){
 }
 
 server.listen(8080, function(){
-    console.log('Server up');
+    ver();
 });
-
-
 
 
 const { MongoClient } = require('mongodb');
@@ -45,11 +43,10 @@ const dbName = 'SO1_Proyecto1';
 
 const ver = async () =>{
     await client.connect();
-      //console.log('Connected successfully to server');
+      console.log('Connected successfully to server');
       const db = client.db(dbName);
       const collection = db.collection('Logs');
-      const findResult = await collection.find({}).toArray();
-      //console.log('Found documents =>', findResult);
-      socketConnection(findResult);
+      const findResult = await collection.find().toArray();
+      console.log('Found documents =>', findResult);
+      //socketConnection(findResult);
 }
-ver();
